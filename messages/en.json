@@ -1,11 +1,17 @@
 {
   "nav": { "brand": "Revent", "browse": "Browse", "listVenue": "List your venue" },
   "home": {
+    "eyebrow": "Tonight in {city}",
+    "statement": "<n>{count}</n> {count, plural, one {place} other {places}} to be tonight",
+    "statementEmpty": "Nothing on tonight. There's always the weekend.",
+    "sub": "Live music, club nights, quizzes and happy hours at bars and venues across Georgia.",
+    "nextUp": "Starts next",
     "tonight": "Tonight",
     "weekend": "This weekend",
     "trending": "Trending",
-    "allEvents": "All events",
-    "seeAll": "See all"
+    "allEvents": "All upcoming",
+    "seeAll": "See all",
+    "footer": "Revent · Events across Georgia"
   },
   "filters": {
     "city": "City",

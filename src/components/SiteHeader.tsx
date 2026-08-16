@@ -20,6 +20,7 @@ export async function SiteHeader({
     <header className={styles.header}>
       <div className={styles.inner}>
         <Link href={`/${locale}`} className={styles.brand}>
+          <span className={styles.mark} aria-hidden="true" />
           {t("brand")}
         </Link>
         <CitySelect cities={cities} activeSlug={activeCitySlug} locale={locale} />
@@ -27,6 +28,9 @@ export async function SiteHeader({
           <Link href="/ka" className={locale === "ka" ? styles.active : undefined}>
             ქარ
           </Link>
+          <span className={styles.langDivider} aria-hidden="true">
+            /
+          </span>
           <Link href="/en" className={locale === "en" ? styles.active : undefined}>
             EN
           </Link>

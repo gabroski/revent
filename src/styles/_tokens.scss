@@ -1,18 +1,23 @@
-// Nightlife content reads better dark. This is a deliberate single-theme choice,
-// not a missing light mode — a theme toggle is out of scope for Phase 1.
+// Revent visual identity.
+//
+// Reference: the printed listings board outside a club, and the flyposted wall.
+// Ground is plum-black rather than neutral near-black; accents are tungsten amber
+// (street light, bar bulb) and qvevri wine. Warm, not cold — Tbilisi nightlife is
+// not a Berlin techno pastiche.
 :root {
-  --color-bg: #0e0e11;
-  --color-surface: #17171c;
-  --color-surface-raised: #1f1f26;
-  --color-text: #f4f4f5;
-  --color-text-muted: #a1a1ab;
-  --color-accent: #ff4d6d;
-  --color-accent-text: #ffffff;
-  --color-border: #2a2a33;
+  --ink: #120c10;
+  --ink-raised: #1c1319;
+  --ink-high: #271b23;
+  --bone: #ede6dc;
+  --bone-dim: #9a8c93;
+  --amber: #f2a03d;
+  --amber-deep: #c97b22;
+  --wine: #7a1f33;
+  --line: #33242c;
 
-  --radius-sm: 6px;
-  --radius-md: 12px;
-  --radius-lg: 20px;
+  // Print feel: near-square corners, not the 12px rounding of every SaaS card.
+  --radius: 2px;
+  --radius-pill: 999px;
 
   --space-1: 4px;
   --space-2: 8px;
@@ -22,6 +27,9 @@
   --space-6: 32px;
   --space-7: 48px;
   --space-8: 64px;
+  --space-9: 96px;
 
-  --max-width: 1200px;
+  --max-width: 1240px;
+
+  --ease: cubic-bezier(0.2, 0.7, 0.3, 1);
 }

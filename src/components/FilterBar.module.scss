@@ -2,29 +2,40 @@
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-2);
-  margin: var(--space-5) 0;
+  margin: var(--space-5) 0 var(--space-6);
 }
 
 .chip {
-  background: var(--color-surface);
-  color: var(--color-text-muted);
-  border: 1px solid var(--color-border);
-  border-radius: 999px;
+  background: transparent;
+  color: var(--bone-dim);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
   padding: var(--space-2) var(--space-4);
-  font: inherit;
-  font-size: 0.875rem;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   cursor: pointer;
+  transition: color 160ms var(--ease), border-color 160ms var(--ease),
+    background 160ms var(--ease);
 
   &:hover {
-    color: var(--color-text);
+    color: var(--bone);
+    border-color: var(--bone-dim);
   }
 }
 
 .chipActive {
   composes: chip;
-  background: var(--color-accent);
-  border-color: var(--color-accent);
-  color: var(--color-accent-text);
+  background: var(--amber);
+  border-color: var(--amber);
+  color: var(--ink);
+  font-weight: 700;
+
+  &:hover {
+    color: var(--ink);
+    border-color: var(--amber);
+  }
 }
 
 .spacer {

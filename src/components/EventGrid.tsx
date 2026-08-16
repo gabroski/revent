@@ -17,7 +17,7 @@ export async function EventGrid({
     return (
       <div className={styles.empty}>
         <p className={styles.emptyTitle}>{t("title")}</p>
-        <p>{t("body")}</p>
+        <p className={styles.emptyBody}>{t("body")}</p>
       </div>
     );
   }

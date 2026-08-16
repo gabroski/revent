@@ -1,0 +1,87 @@
+.frame {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  width: 100%;
+  overflow: hidden;
+  background: var(--ink-raised);
+}
+
+.photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 500ms var(--ease), filter 500ms var(--ease);
+}
+
+// Generated poster: shown when a venue has not uploaded artwork. Rather than a
+// grey box, the event's own words become the image.
+.generated {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-4);
+  color: var(--bone);
+}
+
+.generated::after {
+  // Hairline inset rule, like a printed poster's trim.
+  content: "";
+  position: absolute;
+  inset: var(--space-2);
+  border: 1px solid rgba(237, 230, 220, 0.16);
+  pointer-events: none;
+}
+
+.tone0 {
+  background: linear-gradient(155deg, #7a1f33 0%, #2a1018 78%);
+}
+.tone1 {
+  background: linear-gradient(155deg, #b4671f 0%, #2a1a10 78%);
+}
+.tone2 {
+  background: linear-gradient(155deg, #2f4739 0%, #101a14 78%);
+}
+.tone3 {
+  background: linear-gradient(155deg, #3b2a55 0%, #150f22 78%);
+}
+.tone4 {
+  background: linear-gradient(155deg, #1f4a5a 0%, #0d1b21 78%);
+}
+
+.kicker {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.625rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(237, 230, 220, 0.72);
+  position: relative;
+  z-index: 1;
+}
+
+.headline {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 800;
+  font-size: clamp(1.25rem, 2.6vw, 1.75rem);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  position: relative;
+  z-index: 1;
+  // Long Georgian titles must not spill out of the poster.
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.foot {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.625rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(237, 230, 220, 0.66);
+  position: relative;
+  z-index: 1;
+}

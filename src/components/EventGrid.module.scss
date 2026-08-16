@@ -1,17 +1,32 @@
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-  gap: var(--space-4);
+  grid-template-columns: repeat(auto-fill, minmax(248px, 1fr));
+  gap: var(--space-5);
+
+  @media (max-width: 640px) {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: var(--space-4);
+  }
 }
 
+// An empty screen is an invitation to act, not an apology.
 .empty {
-  padding: var(--space-7) 0;
+  padding: var(--space-8) 0;
   text-align: center;
-  color: var(--color-text-muted);
+  border: 1px dashed var(--line);
+  border-radius: var(--radius);
 }
 
 .emptyTitle {
-  color: var(--color-text);
-  font-weight: 600;
-  margin-bottom: var(--space-2);
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--bone);
+  margin: 0 0 var(--space-2);
+}
+
+.emptyBody {
+  color: var(--bone-dim);
+  margin: 0;
+  font-size: 0.9375rem;
 }

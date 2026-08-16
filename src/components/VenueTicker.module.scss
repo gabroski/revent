@@ -1,0 +1,61 @@
+// The listings board outside a club: venue names crawling past on a lit strip.
+.strip {
+  border-block: 1px solid var(--line);
+  background: var(--ink-raised);
+  overflow: hidden;
+  padding: var(--space-3) 0;
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0,
+    #000 8%,
+    #000 92%,
+    transparent 100%
+  );
+}
+
+.track {
+  display: flex;
+  width: max-content;
+  animation: crawl 46s linear infinite;
+}
+
+.group {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  padding-right: var(--space-5);
+}
+
+.name {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: -0.01em;
+  color: var(--bone);
+  white-space: nowrap;
+}
+
+.dot {
+  color: var(--amber);
+  font-size: 0.5rem;
+}
+
+.strip:hover .track {
+  animation-play-state: paused;
+}
+
+@keyframes crawl {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    // Exactly one group's width, so the loop is seamless.
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track {
+    animation: none;
+  }
+}

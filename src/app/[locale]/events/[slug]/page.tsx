@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
+import { Poster } from "@/components/Poster";
 import { SiteHeader } from "@/components/SiteHeader";
 import type { Locale } from "@/i18n/routing";
 import { pickContent } from "@/lib/content";
@@ -48,14 +49,14 @@ export default async function EventPage({ params }: Props) {
       <SiteHeader locale={locale} cities={cities} activeCitySlug={event.city.slug} />
       <main className="container">
         <div className={styles.layout}>
-          <div>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              className={styles.poster}
-              src={publicImageUrl(event.poster_image_path)}
-              alt={title}
-            />
-          </div>
+          <Poster
+            className={styles.posterWrap}
+            imagePath={event.poster_image_path}
+            title={title}
+            kicker={pickContent(event.category, "name", locale) ?? ""}
+            foot={venueName}
+            seed={event.id}
+          />
           <div>
             <span className={styles.when}>{formatEventDate(event.starts_at, locale)}</span>
             <h1 className={styles.title}>{title}</h1>
@@ -71,7 +72,9 @@ export default async function EventPage({ params }: Props) {
               </dd>
 
               <dt className={styles.label}>{pickContent(event.category, "name", locale)}</dt>
-              <dd className={styles.value}>{formatPrice(event.entry_fee_gel, locale)}</dd>
+              <dd className={styles.priceValue}>
+                {formatPrice(event.entry_fee_gel, locale)}
+              </dd>
 
               {event.dress_code && (
                 <>

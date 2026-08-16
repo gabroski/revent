@@ -1,7 +1,11 @@
 -- Seed data for local development and tests.
 --
--- All dates are RELATIVE (now() + interval ...). Never hardcode timestamps here:
--- a literal date rots, and the "Tonight" section silently empties a week later.
+-- All dates are RELATIVE, and anchored to Tbilisi's EVENING rather than to the
+-- moment the seed happens to run. `now() + interval '5 hours'` looks fine until
+-- you seed at 22:00 and every "tonight" event lands at 03:00 the next morning.
+--
+-- After running this file, run the reschedule block at the bottom, which pins
+-- events to 21:00 local and spreads them across the coming week.
 --
 -- The test suite depends on specific rows existing. Before removing anything, check:
 --   * an event titled with "Jazz" and one containing "ჯაზ"  -> search tests
@@ -198,3 +202,34 @@ insert into event_images (event_id, image_path, position)
 select id, 'posters/placeholder.jpg', 0 from events where slug = 'jazz-night-at-fabrika-a1b2c3'
 union all
 select id, 'posters/placeholder.jpg', 1 from events where slug = 'jazz-night-at-fabrika-a1b2c3';
+
+-- ---------------------------------------------------------------------------
+-- Reschedule: pin events to Tbilisi evenings.
+--
+-- Two events are placed inside the next couple of hours so the "Tonight"
+-- section is never empty in a fresh environment, and the rest spread across
+-- the coming week. Re-run this block alone any time the seed data has aged.
+-- ---------------------------------------------------------------------------
+with anchor as (
+  select (date_trunc('day', now() at time zone 'Asia/Tbilisi') + interval '21 hours')
+           at time zone 'Asia/Tbilisi' as tonight_9pm
+)
+update events e set starts_at = v.new_start, ends_at = v.new_start + interval '5 hours'
+from (
+  select * from (values
+    ('late-night-house-g7h8i9',            now() + interval '30 minutes'),
+    ('techno-basement-d4e5f6',             now() + interval '90 minutes'),
+    ('jazz-night-at-fabrika-a1b2c3',       (select tonight_9pm from anchor)),
+    ('sunset-dj-set-y7z8a9',               (select tonight_9pm from anchor) + interval '22 hours'),
+    ('happy-hour-vera-p7q8r9',             (select tonight_9pm from anchor) + interval '21 hours'),
+    ('jaz-kvarteti-j1k2l3',                (select tonight_9pm from anchor) + interval '1 day'),
+    ('trivia-tuesday-m4n5o6',              (select tonight_9pm from anchor) + interval '2 days'),
+    ('karaoke-night-v4w5x6',               (select tonight_9pm from anchor) + interval '3 days'),
+    ('beach-party-b1c2d3',                 (select tonight_9pm from anchor) + interval '4 days'),
+    ('wine-tasting-e4f5g6',                (select tonight_9pm from anchor) + interval '5 days'),
+    ('stand-up-in-english-s1t2u3',         (select tonight_9pm from anchor) + interval '6 days'),
+    ('unpublished-event-must-not-appear-k1l2m3', (select tonight_9pm from anchor) + interval '3 days'),
+    ('past-event-must-not-appear-h7i8j9',  now() - interval '2 days')
+  ) as t(slug, new_start)
+) v
+where e.slug = v.slug;
