@@ -4,9 +4,7 @@ import { createPublicClient } from "./server";
 // These tests require a running local Supabase (`npx supabase start` + `db reset`).
 // They are skipped when it is unreachable rather than failing the suite, but they
 // are NOT optional before deploying: they are the tests that catch a data leak.
-const hasSupabase = Boolean(
-  process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-);
+const hasSupabase = process.env.REVENT_DB_AVAILABLE === "true";
 
 describe.runIf(hasSupabase)("public read policies", () => {
   it("returns only future published events to anonymous readers", async () => {

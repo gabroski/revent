@@ -1,9 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { listEvents } from "./queries";
 
-const hasSupabase = Boolean(
-  process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-);
+const hasSupabase = process.env.REVENT_DB_AVAILABLE === "true";
 
 describe.runIf(hasSupabase)("search", () => {
   it("matches an English title substring", async () => {

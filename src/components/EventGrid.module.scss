@@ -1,0 +1,17 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: var(--space-4);
+}
+
+.empty {
+  padding: var(--space-7) 0;
+  text-align: center;
+  color: var(--color-text-muted);
+}
+
+.emptyTitle {
+  color: var(--color-text);
+  font-weight: 600;
+  margin-bottom: var(--space-2);
+}

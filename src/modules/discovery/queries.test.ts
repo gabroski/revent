@@ -2,9 +2,7 @@ import { describe, it, expect } from "vitest";
 import { listEvents, getEventBySlug, listCities, listCategories } from "./queries";
 
 // Requires a running local Supabase (`npx supabase start && npx supabase db reset`).
-const hasSupabase = Boolean(
-  process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-);
+const hasSupabase = process.env.REVENT_DB_AVAILABLE === "true";
 
 describe.runIf(hasSupabase)("listEvents", () => {
   it("returns only future published events", async () => {
