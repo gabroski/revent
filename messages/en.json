@@ -1,0 +1,42 @@
+{
+  "nav": { "brand": "Revent", "browse": "Browse", "listVenue": "List your venue" },
+  "home": {
+    "tonight": "Tonight",
+    "weekend": "This weekend",
+    "trending": "Trending",
+    "allEvents": "All events",
+    "seeAll": "See all"
+  },
+  "filters": {
+    "city": "City",
+    "category": "Category",
+    "when": "When",
+    "free": "Free entry",
+    "clear": "Clear filters",
+    "search": "Search events",
+    "more": "Load more"
+  },
+  "when": {
+    "any": "Any date",
+    "tonight": "Tonight",
+    "tomorrow": "Tomorrow",
+    "weekend": "This weekend",
+    "week": "This week"
+  },
+  "event": {
+    "free": "Free",
+    "dressCode": "Dress code",
+    "at": "Where",
+    "upcoming": "Upcoming events"
+  },
+  "empty": {
+    "title": "Nothing here yet",
+    "body": "No events match these filters. Try a wider date range or another category."
+  },
+  "error": { "title": "Something went wrong", "retry": "Try again" },
+  "notFound": {
+    "title": "Page not found",
+    "body": "This event may have ended or been removed.",
+    "browse": "Browse events"
+  }
+}

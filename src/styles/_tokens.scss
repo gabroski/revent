@@ -1,0 +1,27 @@
+// Nightlife content reads better dark. This is a deliberate single-theme choice,
+// not a missing light mode — a theme toggle is out of scope for Phase 1.
+:root {
+  --color-bg: #0e0e11;
+  --color-surface: #17171c;
+  --color-surface-raised: #1f1f26;
+  --color-text: #f4f4f5;
+  --color-text-muted: #a1a1ab;
+  --color-accent: #ff4d6d;
+  --color-accent-text: #ffffff;
+  --color-border: #2a2a33;
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+
+  --max-width: 1200px;
+}
