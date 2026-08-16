@@ -1,0 +1,26 @@
+.wrap {
+  padding: var(--space-8) 0;
+  text-align: center;
+}
+
+.title {
+  font-size: 1.75rem;
+  margin-bottom: var(--space-3);
+}
+
+.body {
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-5);
+}
+
+.action {
+  display: inline-block;
+  background: var(--color-accent);
+  color: var(--color-accent-text);
+  border: none;
+  border-radius: 999px;
+  padding: var(--space-3) var(--space-6);
+  font: inherit;
+  font-size: 0.9375rem;
+  cursor: pointer;
+}
