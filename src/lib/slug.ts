@@ -1,0 +1,19 @@
+const GEORGIAN_MAP: Record<string, string> = {
+  ა: "a", ბ: "b", გ: "g", დ: "d", ე: "e", ვ: "v", ზ: "z", თ: "t",
+  ი: "i", კ: "k", ლ: "l", მ: "m", ნ: "n", ო: "o", პ: "p", ჟ: "zh",
+  რ: "r", ს: "s", ტ: "t", უ: "u", ფ: "p", ქ: "k", ღ: "gh", ყ: "q",
+  შ: "sh", ჩ: "ch", ც: "ts", ძ: "dz", წ: "ts", ჭ: "ch", ხ: "kh",
+  ჯ: "j", ჰ: "h",
+};
+
+export function transliterate(input: string): string {
+  return [...input].map((ch) => GEORGIAN_MAP[ch] ?? ch).join("");
+}
+
+export function makeSlug(title: string, shortId: string): string {
+  const base = transliterate(title)
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+  return base ? `${base}-${shortId}` : shortId;
+}
