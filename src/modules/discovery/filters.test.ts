@@ -1,5 +1,33 @@
 import { describe, it, expect } from "vitest";
-import { parseFilters, toSearchParams, resolveDateRange } from "./filters";
+import {
+  parseFilters,
+  toSearchParams,
+  resolveDateRange,
+  sanitizeQuery,
+} from "./filters";
+
+describe("sanitizeQuery", () => {
+  it("keeps Latin and Georgian letters, numbers and spaces", () => {
+    expect(sanitizeQuery("Jazz Night 90")).toBe("Jazz Night 90");
+    expect(sanitizeQuery("ჯაზის საღამო")).toBe("ჯაზის საღამო");
+  });
+
+  it("strips punctuation that trips the WAF", () => {
+    expect(sanitizeQuery("'; drop table events;--")).toBe("drop table events");
+  });
+
+  it("collapses the whitespace left behind", () => {
+    expect(sanitizeQuery("dj   ---   set")).toBe("dj set");
+  });
+
+  it("caps runaway input", () => {
+    expect(sanitizeQuery("a".repeat(200))).toHaveLength(60);
+  });
+
+  it("returns an empty string when nothing survives", () => {
+    expect(sanitizeQuery("!!!???")).toBe("");
+  });
+});
 
 describe("parseFilters", () => {
   it("defaults to any date and no filters", () => {

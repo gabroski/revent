@@ -1,5 +1,5 @@
 import { createPublicClient } from "@/lib/supabase/server";
-import { resolveDateRange, type EventFilters } from "./filters";
+import { resolveDateRange, sanitizeQuery, type EventFilters } from "./filters";
 import type {
   Category,
   City,
@@ -60,9 +60,13 @@ export async function listEvents(
   if (filters.freeOnly) query = query.is("entry_fee_gel", null);
 
   if (filters.q) {
-    // ilike over the generated search_text column; the trigram index serves this.
-    const escaped = filters.q.replace(/[%_\\]/g, (m) => `\\${m}`);
-    query = query.ilike("search_text", `%${escaped}%`);
+    // Sanitize before escaping: the WAF rejects punctuation before Postgres sees it.
+    const cleaned = sanitizeQuery(filters.q);
+    if (cleaned) {
+      // ilike over the generated search_text column; the trigram index serves this.
+      const escaped = cleaned.replace(/[%_\\]/g, (m) => `\\${m}`);
+      query = query.ilike("search_text", `%${escaped}%`);
+    }
   }
 
   const decoded = filters.cursor ? decodeCursor(filters.cursor) : null;
@@ -85,10 +89,15 @@ export async function getEventBySlug(slug: string): Promise<EventDetail | null> 
   const supabase = createPublicClient();
   const { data, error } = await supabase
     .from("events")
+    // Spelled out rather than interpolating LIST_SELECT: the detail page needs more
+    // venue columns, and joining `venue` twice makes PostgREST reject the whole query.
     .select(
       `
-      ${LIST_SELECT},
+      id, slug, title_ka, title_en, starts_at, poster_image_path,
+      entry_fee_gel, favorite_count,
       description_ka, description_en, ends_at, dress_code, view_count,
+      city:cities!inner (id, slug, name_ka, name_en),
+      category:categories!inner (id, slug, name_ka, name_en, icon, sort_order),
       venue:venues!inner (
         id, slug, name_ka, name_en, is_verified,
         description_ka, description_en, address_ka, address_en,

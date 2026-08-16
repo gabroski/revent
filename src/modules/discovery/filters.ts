@@ -51,6 +51,23 @@ export function toSearchParams(filters: EventFilters): URLSearchParams {
   return params;
 }
 
+/**
+ * Strips characters a search query has no legitimate use for.
+ *
+ * Supabase sits behind a WAF that inspects request URLs, and punctuation like
+ * `';--` reads as an injection attempt — the request is blocked with an HTML
+ * error page before it ever reaches Postgres. PostgREST parameterizes properly
+ * so this is not a security fix; it keeps ordinary input (an apostrophe in a
+ * venue name) from tripping the WAF.
+ */
+export function sanitizeQuery(raw: string): string {
+  return raw
+    .replace(/[^\p{L}\p{N}\s]/gu, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, 60);
+}
+
 /** Local (UTC+4) wall-clock parts, so "tonight" means tonight in Georgia. */
 function localParts(date: Date) {
   const shifted = new Date(date.getTime() + TZ_OFFSET_HOURS * 3_600_000);
