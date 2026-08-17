@@ -100,3 +100,11 @@
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
+
+// Search sits directly under the statement: the hero says what is on, the
+// query line is how you narrow it. Constrained so the line length stays
+// readable rather than stretching the full grid.
+.search {
+  margin-top: var(--space-6);
+  max-width: 560px;
+}

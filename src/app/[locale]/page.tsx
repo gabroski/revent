@@ -2,6 +2,7 @@ import { cookies } from "next/headers";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import { EventGrid } from "@/components/EventGrid";
+import { SearchBar } from "@/components/SearchBar";
 import { SiteHeader } from "@/components/SiteHeader";
 import { VenueTicker } from "@/components/VenueTicker";
 import type { Locale } from "@/i18n/routing";
@@ -64,6 +65,10 @@ export default async function HomePage({
             )}
           </h1>
           <p className={styles.sub}>{t("sub")}</p>
+
+          <div className={styles.search}>
+            <SearchBar locale={locale} basePath={browseHref} />
+          </div>
 
           {nextUp && (
             <div className={styles.next}>

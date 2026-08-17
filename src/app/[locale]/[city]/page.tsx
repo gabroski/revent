@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { EventGrid } from "@/components/EventGrid";
 import { FilterBar } from "@/components/FilterBar";
 import { LoadMore } from "@/components/LoadMore";
-import { SearchBox } from "@/components/SearchBox";
+import { SearchBar } from "@/components/SearchBar";
 import { SiteHeader } from "@/components/SiteHeader";
 import type { Locale } from "@/i18n/routing";
 import { pickContent } from "@/lib/content";
@@ -39,20 +39,36 @@ export default async function CityPage({ params, searchParams }: Props) {
   const filters = { ...parseFilters(await searchParams), citySlug: city };
   const [categories, page] = await Promise.all([listCategories(), listEvents(filters)]);
   const basePath = `/${locale}/${city}`;
+  // Dropping the query keeps the other filters; dropping filters keeps nothing.
+  const clearedSearch = toSearchParams({
+    ...filters,
+    q: undefined,
+    citySlug: undefined,
+  }).toString();
 
   return (
     <>
       <SiteHeader locale={locale} cities={cities} activeCitySlug={city} />
       <main className="container">
         <h1 className={styles.title}>{pickContent(activeCity, "name", locale)}</h1>
-        <SearchBox basePath={basePath} filters={filters} />
+        <SearchBar
+          locale={locale}
+          basePath={basePath}
+          filters={filters}
+          resultCount={page.items.length}
+        />
         <FilterBar
           locale={locale}
           categories={categories}
           filters={filters}
           basePath={basePath}
         />
-        <EventGrid events={page.items} locale={locale} />
+        <EventGrid
+          events={page.items}
+          locale={locale}
+          query={filters.q}
+          clearHref={filters.q ? `${basePath}?${clearedSearch}` : basePath}
+        />
         {page.nextCursor && (
           <LoadMore
             basePath={basePath}

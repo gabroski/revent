@@ -41,7 +41,11 @@
   },
   "empty": {
     "title": "Nothing here yet",
-    "body": "No events match these filters. Try a wider date range or another category."
+    "body": "No events match these filters. Try a wider date range or another category.",
+    "queryTitle": "Nothing matches “{query}”",
+    "queryBody": "Check the spelling, or try a venue name like Bassiani, or a category like karaoke.",
+    "clearSearch": "Clear the search",
+    "clearFilters": "Clear all filters"
   },
   "error": {
     "title": "Something went wrong",
@@ -110,5 +114,16 @@
     "strength2": "Fair",
     "strength3": "Good",
     "strength4": "Strong"
+  },
+  "search": {
+    "label": "Find",
+    "placeholder": "Event, venue or category",
+    "clear": "Clear search",
+    "count": "{count, plural, =0 {No matches} one {1 match} other {# matches}}",
+    "groupEvents": "Events",
+    "groupVenues": "Venues",
+    "groupCategories": "Categories",
+    "noMatches": "Nothing matches “{query}”",
+    "heroPrompt": "What are you looking for tonight?"
   }
 }
