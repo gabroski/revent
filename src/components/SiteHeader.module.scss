@@ -22,23 +22,10 @@
 }
 
 .brand {
-  font-family: var(--font-display), Georgia, serif;
-  font-weight: 800;
-  font-size: 1.5rem;
-  letter-spacing: -0.03em;
-  color: var(--bone);
   margin-right: auto;
   display: flex;
-  align-items: baseline;
-  gap: var(--space-2);
-}
-
-// The mark: a filled amber square, like a lit bulb on a listings board.
-.mark {
-  width: 10px;
-  height: 10px;
-  background: var(--amber);
-  display: inline-block;
+  align-items: center;
+  min-width: 0;
 }
 
 .signIn {

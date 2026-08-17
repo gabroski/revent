@@ -1,0 +1,33 @@
+.lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.lockupLarge {
+  composes: lockup;
+  gap: var(--space-3);
+}
+
+.mark {
+  width: auto;
+  height: 1.75em;
+  object-fit: contain;
+}
+
+.lockupLarge .mark {
+  height: 3.5em;
+}
+
+.word {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 800;
+  font-size: 1.5rem;
+  letter-spacing: -0.03em;
+  color: var(--bone);
+  line-height: 1;
+}
+
+.lockupLarge .word {
+  font-size: 2.75rem;
+}

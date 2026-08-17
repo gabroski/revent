@@ -4,6 +4,7 @@ import type { Locale } from "@/i18n/routing";
 import { getSessionUser } from "@/lib/supabase/session";
 import type { City } from "@/modules/discovery/types";
 import { CitySelect } from "./CitySelect";
+import { Logo } from "./Logo";
 import styles from "./SiteHeader.module.scss";
 
 export async function SiteHeader({
@@ -24,9 +25,8 @@ export async function SiteHeader({
   return (
     <header className={styles.header}>
       <div className={styles.inner}>
-        <Link href={`/${locale}`} className={styles.brand}>
-          <span className={styles.mark} aria-hidden="true" />
-          {t("brand")}
+        <Link href={`/${locale}`} className={styles.brand} aria-label={t("brand")}>
+          <Logo />
         </Link>
 
         <CitySelect cities={cities} activeSlug={activeCitySlug} locale={locale} />
