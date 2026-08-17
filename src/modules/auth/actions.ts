@@ -2,8 +2,8 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { headers } from "next/headers";
 import type { Locale } from "@/i18n/routing";
+import { getEnv } from "@/lib/env";
 import { createServerSupabase, getSessionUser } from "@/lib/supabase/session";
 import {
   forgotSchema,
@@ -34,11 +34,16 @@ function fieldErrors(error: {
   return fields;
 }
 
-async function siteOrigin(): Promise<string> {
-  const headerList = await headers();
-  const host = headerList.get("x-forwarded-host") ?? headerList.get("host");
-  const proto = headerList.get("x-forwarded-proto") ?? "http";
-  return `${proto}://${host}`;
+/**
+ * Where auth emails point.
+ *
+ * Read from configuration, never from request headers. Host and
+ * X-Forwarded-Host are attacker-controlled: building a reset link from them
+ * lets someone request a reset for another person's account and have the
+ * working token delivered to a domain they own.
+ */
+function siteOrigin(): string {
+  return getEnv().siteUrl;
 }
 
 export async function registerAction(
@@ -69,7 +74,7 @@ export async function registerAction(
     options: {
       // Read by the handle_new_user trigger to populate the profile row.
       data: { display_name: parsed.data.displayName, locale },
-      emailRedirectTo: `${await siteOrigin()}/${locale}/auth/callback`,
+      emailRedirectTo: `${siteOrigin()}/${locale}/auth/callback`,
     },
   });
 
@@ -136,7 +141,7 @@ export async function forgotAction(
 
   const supabase = await createServerSupabase();
   await supabase.auth.resetPasswordForEmail(parsed.data.email, {
-    redirectTo: `${await siteOrigin()}/${locale}/auth/reset`,
+    redirectTo: `${siteOrigin()}/${locale}/auth/reset`,
   });
 
   // Always the same answer, sent or not: anything else is an account oracle.
