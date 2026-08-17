@@ -41,6 +41,42 @@
   display: inline-block;
 }
 
+.signIn {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--amber);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+
+  &:hover {
+    background: var(--bone);
+  }
+}
+
+.account {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--bone-dim);
+  border: 1px solid var(--line);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+  max-width: 12ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  &:hover {
+    color: var(--bone);
+    border-color: var(--amber);
+  }
+}
+
 .langs {
   display: flex;
   align-items: center;

@@ -1,0 +1,26 @@
+.email {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  color: var(--bone-dim);
+  margin: 0 0 var(--space-6);
+}
+
+.logout {
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  color: var(--bone-dim);
+  padding: var(--space-3) var(--space-5);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 160ms var(--ease), border-color 160ms var(--ease);
+
+  &:hover {
+    color: var(--bone);
+    border-color: var(--wine);
+  }
+}

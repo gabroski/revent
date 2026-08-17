@@ -1,0 +1,188 @@
+.wrap {
+  max-width: 420px;
+  margin: 0 auto;
+  padding: var(--space-8) var(--space-5) var(--space-9);
+}
+
+.eyebrow {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--amber);
+  display: block;
+  margin-bottom: var(--space-3);
+}
+
+.title {
+  font-size: clamp(1.875rem, 5vw, 2.5rem);
+  letter-spacing: -0.03em;
+  margin-bottom: var(--space-3);
+}
+
+.lede {
+  color: var(--bone-dim);
+  margin: 0 0 var(--space-6);
+  font-size: 0.9375rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.label {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.625rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--bone-dim);
+}
+
+.input {
+  background: var(--ink-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  color: var(--bone);
+  padding: var(--space-3) var(--space-4);
+  font: inherit;
+  font-size: 0.9375rem;
+  transition: border-color 160ms var(--ease);
+
+  &:focus {
+    border-color: var(--amber);
+    outline: none;
+  }
+
+  &::placeholder {
+    color: rgba(154, 140, 147, 0.6);
+  }
+}
+
+.inputError {
+  composes: input;
+  border-color: var(--wine);
+}
+
+.fieldError {
+  font-size: 0.8125rem;
+  color: #e8836f;
+}
+
+.checkRow {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  font-size: 0.875rem;
+  color: var(--bone-dim);
+}
+
+.checkbox {
+  margin-top: 3px;
+  accent-color: var(--amber);
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.submit {
+  background: var(--amber);
+  color: var(--ink);
+  border: none;
+  border-radius: var(--radius);
+  padding: var(--space-4);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 160ms var(--ease);
+
+  &:hover:not(:disabled) {
+    background: var(--bone);
+  }
+
+  &:disabled {
+    opacity: 0.55;
+    cursor: progress;
+  }
+}
+
+.notice {
+  border-left: 2px solid var(--amber);
+  padding: var(--space-3) var(--space-4);
+  background: var(--ink-raised);
+  font-size: 0.875rem;
+}
+
+.noticeError {
+  composes: notice;
+  border-left-color: var(--wine);
+}
+
+.alt {
+  margin-top: var(--space-6);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--line);
+  font-size: 0.875rem;
+  color: var(--bone-dim);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.link {
+  color: var(--amber);
+
+  &:hover {
+    color: var(--bone);
+  }
+}
+
+// Password strength: four segments, filling as the password gets longer.
+.meter {
+  display: flex;
+  gap: var(--space-1);
+  margin-top: var(--space-1);
+}
+
+.segment {
+  height: 3px;
+  flex: 1;
+  background: var(--line);
+  transition: background 200ms var(--ease);
+}
+
+.segmentOn0,
+.segmentOn1 {
+  composes: segment;
+  background: var(--wine);
+}
+
+.segmentOn2 {
+  composes: segment;
+  background: var(--amber-deep);
+}
+
+.segmentOn3,
+.segmentOn4 {
+  composes: segment;
+  background: var(--amber);
+}
+
+.meterLabel {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.625rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--bone-dim);
+  margin-top: var(--space-1);
+}

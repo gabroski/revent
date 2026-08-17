@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
+import { getSessionUser } from "@/lib/supabase/session";
 import type { City } from "@/modules/discovery/types";
 import { CitySelect } from "./CitySelect";
 import styles from "./SiteHeader.module.scss";
@@ -14,7 +15,11 @@ export async function SiteHeader({
   cities: City[];
   activeCitySlug: string;
 }) {
-  const t = await getTranslations("nav");
+  const [t, tAuth, user] = await Promise.all([
+    getTranslations("nav"),
+    getTranslations("auth"),
+    getSessionUser(),
+  ]);
 
   return (
     <header className={styles.header}>
@@ -23,7 +28,16 @@ export async function SiteHeader({
           <span className={styles.mark} aria-hidden="true" />
           {t("brand")}
         </Link>
+
         <CitySelect cities={cities} activeSlug={activeCitySlug} locale={locale} />
+
+        <Link
+          className={user ? styles.account : styles.signIn}
+          href={user ? `/${locale}/profile` : `/${locale}/auth/login`}
+        >
+          {user ? user.displayName : tAuth("signIn")}
+        </Link>
+
         <div className={styles.langs}>
           <Link href="/ka" className={locale === "ka" ? styles.active : undefined}>
             ქარ
