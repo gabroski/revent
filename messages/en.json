@@ -3,7 +3,7 @@
   "home": {
     "eyebrow": "Tonight in {city}",
     "statement": "<n>{count}</n> {count, plural, one {place} other {places}} to be tonight",
-    "statementEmpty": "Nothing on tonight. There's always the weekend.",
+    "statementEmpty": "Quiet tonight. The week ahead isn't.",
     "sub": "Live music, club nights, quizzes and happy hours at bars and venues across Georgia.",
     "nextUp": "Starts next",
     "tonight": "Tonight",
